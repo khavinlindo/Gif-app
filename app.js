@@ -17,16 +17,17 @@ var results = [];
  }
    
 
+ function createButtons (arr) {
+   for (i=0;i<arr.length;i++) {
+    $(".buttons").append($("<button type='button' class='btn btn-info topics' data-attr='"+ arr[i] + "'> "+ arr[i] +"  </button>"));
+   }
+ }
+
 
  $(document).ready(function () {
-             
+        
       createMainGifDiv();
-
-    for (i=0;i<topics.length;i++) {
-       
-       $(".buttons").append($("<button type='button' class='btn btn-info topics' data-attr='"+ topics[i] + "'> "+topics[i]+"  </button>"));
-       
-            }
+      createButtons(topics);
             
           $(".topics").on("click", function() {
                
@@ -60,7 +61,7 @@ var results = [];
                       GifDivEmpty = false;
                  }
              }); 
-
+               
           });  
           
           $(document).on("click", ".gif", function() {
@@ -79,6 +80,23 @@ var results = [];
       
 
           })
+      
+          
+          $("#gif-search").on("click", function(e) {
+              e.preventDefault();
+
+              var newTopic = $("#input-gif").val().trim();
+              console.log(newTopic);
+
+              topics.push(newTopic);
+              console.log(topics);
+              
+              $(".buttons").empty();
+              createButtons(topics); 
+          })
+          
+        
+          
     });
     
  
