@@ -1,0 +1,42 @@
+
+body {
+    background-color:lightslategray;
+}
+
+.buttons {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.topics {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.gif {
+   margin-top: 20px;
+   margin-right: 15px;
+}
+
+.gifs {
+    margin: auto;
+}
+
+.gifDiv {
+    float: left; 
+    margin-top: 30px;
+}
+
+form {
+    float: right;
+    margin-right: 20px;
+}
+
+#submit {
+    margin-top: 8px;
+}
+
+label {
+    font-weight: bold;
+    color: white;
+}
