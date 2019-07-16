@@ -4,8 +4,11 @@ var topics = ["cat", "dog", "hamster", "turtle", "goldfish", "snake", "rabbit"];
 
  var queryURL = "";
 var GifDivEmpty = true;
-var gifDiv; // The <div> for each individual gif
+
 var gifs; //The main <div> that will hold the gifs
+
+
+var results = [];
 
  function createMainGifDiv () {
 
@@ -13,7 +16,9 @@ var gifs; //The main <div> that will hold the gifs
              $(".row").prepend(gifs);
  }
    
-$(document).ready(function () {
+
+
+ $(document).ready(function () {
              
       createMainGifDiv();
 
@@ -25,7 +30,6 @@ $(document).ready(function () {
             
           $(".topics").on("click", function() {
                
-             
              if (GifDivEmpty == false) {
                   gifs.remove();
                   GifDivEmpty = true;
@@ -41,28 +45,40 @@ $(document).ready(function () {
                  method: "GET"
              }).then(function(res) {
                 
-                 var results = res.data;
+                 results = res.data;
                
                 console.log(results); 
                 
                  for (i=0;i<results.length;i++) {
-                      var gif = $(" <img class='gif' src="+results[i].images.fixed_width_still.url+"data-animate='still'>");
-                      gifDiv = $("<div class='gifDiv'>");
+                      var gif = $(" <img class='gif' src="+results[i].images.fixed_width_still.url+" data-state='still' data-animate='"+results[i].images.fixed_width.url+"' data-still='"+results[i].images.fixed_width_still.url+"'>");
+                      var gifDiv = $("<div class='gifDiv'>");
                       var rating = $("<h5 class='rating'> Rating: "+results[i].rating+"</h5>")
                       
                       gifDiv.append(rating);
                       gifDiv.append(gif);
                       gifs.append(gifDiv);
-
-
                       GifDivEmpty = false;
                  }
-                 
+             }); 
 
-                })
+          });  
+          
+          $(document).on("click", ".gif", function() {
+            var state = $(this).attr("data-state"); //record state of gif
+             
+              if (state==="still") {
+             $(this).attr("src", $(this).attr("data-animate"));
+              $(this).attr("data-state", "animated");
+              }
+             
+              
+             if (state==="animated") {
+              $(this).attr("src", $(this).attr("data-still"));
+              $(this).attr("data-state", "still");
+             }
+      
 
-          }) 
-        
+          })
     });
     
  
