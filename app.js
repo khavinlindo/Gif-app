@@ -2,11 +2,10 @@
 
 var topics = ["cat", "dog", "hamster", "turtle", "goldfish", "snake", "rabbit"];
 
- var queryURL = "";
+var queryURL = "";
 var GifDivEmpty = true;
 
 var gifs; //The main <div> that will hold the gifs
-
 
 var results = [];
 
@@ -29,7 +28,7 @@ var results = [];
       createMainGifDiv();
       createButtons(topics);
             
-          $(".topics").on("click", function() {
+          $(document).on("click", ".topics", function() {
                
              if (GifDivEmpty == false) {
                   gifs.remove();
@@ -78,7 +77,6 @@ var results = [];
               $(this).attr("data-state", "still");
              }
       
-
           })
       
           
@@ -94,9 +92,7 @@ var results = [];
               $(".buttons").empty();
               createButtons(topics); 
           })
-          
-        
-          
+           
     });
     
  
